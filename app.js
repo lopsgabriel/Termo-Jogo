@@ -1,33 +1,9 @@
-import { sortear_palavra } from './functions.js'
-const caminho_arquivo = 'palavras.txt'
-const palavras = await carregar_palavras(caminho_arquivo)
-const palavra_sorteada = await sortear_palavra(palavras)
-let tentativas = 1
-let caixaAtiva = null; // Para rastrear a caixinha ativa
-
-async function carregar_palavras() {
-    try {
-        const response = await fetch('./palavras.txt')
-        
-        if (!response.ok) {
-            throw new Error(`Erro ao carregar o arquivo de palavras: ${response.statusText}`)
-        }
-
-        const palavras = await response.text()
-        return palavras.split(/\r?\n/)
-    } catch (erro) {
-        console.error(erro)
-        return []
-    }
-}
-
-function selecionar_caixa(event) {
-    if (caixaAtiva) {
-        caixaAtiva.classList.remove('letter-edit'); // Remove o destaque anterior
-    }
-    caixaAtiva = event.target; // Atualiza a caixinha ativa
-    caixaAtiva.classList.add('letter-edit'); // Adiciona destaque à nova caixa ativa
-}
+import { 
+    sortear_palavra, carregar_palavras, verificar_se_palavra_existe,
+     verificar_letra, comparar_palavras,
+     errou_palavra
+} from './functions.js'
+let caixaAtiva = null; 
 
 function atualizar_linhas(){
     const nova_linha = document.getElementById(`row-${tentativas}`);
@@ -38,18 +14,13 @@ function atualizar_linhas(){
     });
 }
 
-function verificar_letra(box, indice) {
-    const letra = box.textContent
-    if (letra === palavra_sorteada.toUpperCase()[indice]) {
-        box.classList.add('letter-right-position')
-    } else if (palavra_sorteada.toUpperCase().includes(letra)) {
-        box.classList.add('letter-included')
-    } else {
-        console.log(` A Letra ${letra} não existe na palavra`)
+function selecionar_caixa(event) {
+    if (caixaAtiva) {
+        caixaAtiva.classList.remove('letter-edit'); // Remove o destaque anterior
     }
+    caixaAtiva = event.target; // Atualiza a caixinha ativa
+    caixaAtiva.classList.add('letter-edit'); // Adiciona destaque à nova caixa ativa
 }
-
-
 
 function confirmar_palavra() {
     const boxes = document.getElementById(`row-${tentativas}`).querySelectorAll('.letter-box')
@@ -67,19 +38,27 @@ function confirmar_palavra() {
         alert('Palavra incompleta')
         return
     }
+    if (!verificar_se_palavra_existe()){
+        alert('Palavra não existe')
+        return
+    }
     
     boxes.forEach((box, index) => {
         verificar_letra(box, index); // Chama verificar_letra apenas se a palavra estiver completa
     });
-       
-    if (palavra === palavra_sorteada.toUpperCase()) {
-        alert('Parabéns, você acertou!')
+    if (!comparar_palavras(palavra)){
+        errou_palavra()
+
+        const primeira_caixa = document.getElementById(`row-${tentativas}`).querySelector('.letter-box')
+        if (caixaAtiva) {
+            caixaAtiva.classList.remove('letter-edit'); // Remove o destaque da caixa anterior
+        }
+        primeira_caixa.classList.add('letter-edit')
+        caixaAtiva = primeira_caixa
     } else {
-        tentativas++
-        atualizar_linhas()
+        alert('Parabéns, você acertou a palavra!')
     }
 }
-
 
 function adicionar_letra() {
     const input = document.getElementById('letra-input')
@@ -94,17 +73,19 @@ function adicionar_letra() {
             caixaAtiva.classList.remove('letter-edit');
             caixaAtiva = next_box;
             caixaAtiva.classList.add('letter-edit');
+        } else {
+            caixaAtiva.classList.remove('letter-edit'); // Se não houver próxima, remove o destaque
+            caixaAtiva = null; // Desativa a seleção
         }
+    } else {
+        alert('Selecione uma caixa e insira uma letra.'); // Feedback para o usuário se algo estiver errado
     }
 }
-
-
 
 async function main() {
     document.getElementById(`row-${tentativas}`).querySelectorAll('.letter-box').forEach(box => box.addEventListener('click', selecionar_caixa));
     document.getElementById('enviar-letra').addEventListener('click', adicionar_letra)
     document.getElementById('confirmar-palavra').addEventListener('click', confirmar_palavra)
     atualizar_linhas()
-    console.log(palavra_sorteada)
 }
 main()
