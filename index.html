@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação de Palavras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>Vocábulo</h1>
+        <div id="word-grid">
+            <!-- Grid das letras -->
+            <div class="row" id="row-1">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="row" id="row-2">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="row" id="row-3">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="row" id="row-4">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="row" id="row-5">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+
+        </div>
+
+        <!-- Input para inserir letras -->
+        <div id="input-container">
+            <input type="text" id="letra-input" maxlength="1" placeholder="Insira uma letra">
+            <button id="enviar-letra">Enviar Letra</button>
+        </div>
+        <button id="confirmar-palavra"  >Confirmar Palavra</button>
+    </div>
+
+    <script type = "module" src="app.js"></script>
+</body>
+</html>

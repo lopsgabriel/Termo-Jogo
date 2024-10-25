@@ -1,0 +1,77 @@
+body {
+    background-color: #3a363c;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    text-align: center;
+}
+
+#word-grid .row {
+    display: flex;
+    justify-content: center;
+    margin: 3px 0;
+}
+
+.letter-box {
+    border-radius: 10%;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #353037;
+    background-color: #322e33;
+    margin: 2px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #EDEDED;
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+
+.box-active {
+    border: 0.125em solid #353037;
+    background-color: #433e45;
+}
+
+.letter-edit {
+    border-bottom: 0.25em solid #353037 !important;
+}
+
+.letter-right-position {
+    border-color: #24a75b;
+    background-color: #24a75b;
+}
+
+.letter-included {
+    border-color: #d8c756;
+    background-color: #d8c756;
+}
+
+
+
+#input-container {
+    margin-top: 20px;
+}
+
+#letter-input {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #463F3A;
+}
+
+#submit-letter {
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #463F3A;
+    background-color: #463F3A;
+    color: white;
+    cursor: pointer;
+}
