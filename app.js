@@ -1,6 +1,6 @@
 import { 
     sortear_palavra, carregar_palavras, verificar_se_palavra_existe,
-     verificar_letra, comparar_palavras,
+     verificar_letra, comparar_palavras, tentativas,
      errou_palavra
 } from './functions.js'
 let caixaAtiva = null; 
@@ -83,9 +83,9 @@ function adicionar_letra() {
 }
 
 async function main() {
+    atualizar_linhas()
     document.getElementById(`row-${tentativas}`).querySelectorAll('.letter-box').forEach(box => box.addEventListener('click', selecionar_caixa));
     document.getElementById('enviar-letra').addEventListener('click', adicionar_letra)
     document.getElementById('confirmar-palavra').addEventListener('click', confirmar_palavra)
-    atualizar_linhas()
 }
 main()

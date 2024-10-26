@@ -13,7 +13,6 @@ function comparar_palavras(palavra) {
 
 function errou_palavra() {
     tentativas++
-    atualizar_linhas()
 }
 
 async function carregar_palavras() {
@@ -80,5 +79,5 @@ function sortear_palavra(palavras){
 
 export { 
     sortear_palavra, carregar_palavras, verificar_se_palavra_existe,
-     verificar_letra, comparar_palavras, errou_palavra
+     verificar_letra, comparar_palavras, errou_palavra, tentativas
     }
