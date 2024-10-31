@@ -1,3 +1,25 @@
+function caixa_seguinte(caixaAtiva) {
+    if (!caixaAtiva.value) return // Verifica se há uma caixa ativa
+
+    const next_box = caixaAtiva.value.nextElementSibling
+    caixaAtiva.value.classList.remove('letter-edit')
+    caixaAtiva.value = next_box
+
+    if (caixaAtiva.value && caixaAtiva.value.classList.contains('letter-box')) {
+        caixaAtiva.value.classList.add('letter-edit')
+    }
+}
+export function pressionamento_tecla(caixaAtiva) {
+    document.addEventListener('keydown', (event) => {
+        if (!caixaAtiva.value) return
+        if (event.key.length === 1 && /^[a-zA-Z]$/.test(event.key)) {
+            caixaAtiva.value.textContent = event.key.toUpperCase()
+            caixa_seguinte(caixaAtiva)
+            event.preventDefault()
+        }
+    });
+}
+
 export function atualizar_linhas(tentativas, caixaAtivaRef) {
     const nova_linha = document.getElementById(`row-${tentativas}`)
     if (!nova_linha) {
@@ -58,7 +80,7 @@ export async function carregar_palavras(caminho_arquivo) {
 }
 
 export function verificar_letra(box, indice, palavra_sorteada) {
-    const letra = box.textContent
+    const letra = box.textContent.toUpperCase()
     if (letra === palavra_sorteada.toUpperCase()[indice]) {
         box.classList.add('letter-right-position')
     } else if (palavra_sorteada.toUpperCase().includes(letra)) {
