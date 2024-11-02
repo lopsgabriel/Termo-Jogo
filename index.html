@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Adivinhação de Palavras</title>
+    <title>Vocábulo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div id="game-container">
         <h1>Vocábulo</h1>
         <div id="word-grid">
-            <!-- Grid das letras -->
             <div class="row" id="row-1">
                 <div class="letter-box"></div>
                 <div class="letter-box"></div>
@@ -47,15 +45,17 @@
                 <div class="letter-box"></div>
                 <div class="letter-box"></div>
             </div>
-
         </div>
+        <button id="confirmar-palavra" class="confirm-btn">Confirmar Palavra</button>
+    </div>
 
-        <!-- Input para inserir letras -->
-        <!-- <div id="input-container">
-            <input type="text" id="letra-input" maxlength="1" placeholder="Insira uma letra">
-            <button id="enviar-letra">Enviar Letra</button>
-        </div> -->
-        <button id="confirmar-palavra"  >Confirmar Palavra</button>
+    <div id="instructions">
+        <h2>Como Jogar</h2>
+        <p>Tente adivinhar a palavra correta.</p>
+        <p>Digite uma letra em cada caixa e confirme sua palavra.</p>
+        <p>Você tem 5 tentativas para acertar!</p>
+        <P>Se a letra ficou <span style="color: #24a75b;">verde</span>, ela está na palavra e posição correta</P>
+        <p>Se ficou <span style="color: #d8c756;">amerela</span>, ela está na palavra, mas na posição incorreta</p>
     </div>
 
     <script type = "module" src="app.js"></script>

@@ -79,8 +79,36 @@ export async function carregar_palavras(caminho_arquivo) {
     }
 }
 
+export function verificar_letra2(boxes, palavra_sorteada) {
+    palavra_sorteada = palavra_sorteada.toUpperCase();
+    console.log('funcao verificar_letra2')
+
+    const letrasDisponiveis = {};
+    for (let letra of palavra_sorteada) {
+        letrasDisponiveis[letra] = (letrasDisponiveis[letra] || 0) + 1;
+    }
+    console.log(letrasDisponiveis)
+
+    boxes.forEach((box, index) =>{
+        const letra = box.textContent.toUpperCase()
+        if (letrasDisponiveis[letra] > 0) {
+            console.log(`${letra}, posicao ${index}`)
+            if (palavra_sorteada.toUpperCase()[index] === letra) {
+                box.classList.add('letter-right-position')
+                letrasDisponiveis[letra]--;
+            } else if (palavra_sorteada.toUpperCase().includes(letra)) {
+                box.classList.add('letter-included')
+            } else {
+                console.log(` A Letra ${letra} não existe na palavra`)
+            }   
+        }
+    })
+
+}
+
 export function verificar_letra(box, indice, palavra_sorteada) {
     const letra = box.textContent.toUpperCase()
+
     if (letra === palavra_sorteada.toUpperCase()[indice]) {
         box.classList.add('letter-right-position')
     } else if (palavra_sorteada.toUpperCase().includes(letra)) {

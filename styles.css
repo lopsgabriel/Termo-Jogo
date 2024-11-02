@@ -53,7 +53,24 @@ body {
     background-color: #d8c756;
 }
 
+.confirm-btn {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 1px solid #057732;
+    background-color: #10aa50;
+    color: rgb(255, 255, 255);
+    opacity: 0.6;
+    transition: 0.3s;
+    text-shadow: #000000 1px 1px 1px;
+    cursor: pointer;
+}
 
+.confirm-btn:hover {
+    /* background-color: rgb(13, 161, 75); */
+    opacity: 1;
+}
 
 #input-container {
     margin-top: 20px;
@@ -75,6 +92,31 @@ body {
     color: white;
     cursor: pointer;
 }
+
+#instructions {
+    position: fixed;
+    right: 20px;
+    top: 50px;
+    width: 200px;
+    padding: 15px;
+    background-color: #302d32;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#instructions h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+#instructions p {
+    font-size: 0.8em;
+    color: #ffffff;
+    margin: 5px 0;
+}
+
 
 [contenteditable] {
     outline: 0px solid transparent;

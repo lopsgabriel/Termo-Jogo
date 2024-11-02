@@ -1,8 +1,9 @@
 import { 
      errou_palavra, carregar_palavras, verificar_letra,
      verificar_se_palavra_existe, sortear_palavra, atualizar_linhas,
-     selecionar_caixa, conferir_acerto, remover_listeners, pressionamento_tecla
-} from './functions.js'
+     selecionar_caixa, conferir_acerto, remover_listeners, pressionamento_tecla,
+     verificar_letra2
+    } from './functions.js'
 let caixaAtiva = { value: null }; 
 let tentativas = 1
 const caminho_arquivo = 'palavras.txt'
@@ -13,6 +14,9 @@ function confirmar_palavra() {
     const boxes = document.getElementById(`row-${tentativas}`).querySelectorAll('.letter-box')
     let palavra = ''
     let palavra_completa = true
+    if (caixaAtiva.value) {
+        caixaAtiva.value.classList.remove('letter-edit')
+    }
 
     boxes.forEach((box) => {
         if(!box.textContent){
@@ -31,10 +35,12 @@ function confirmar_palavra() {
         alert('Palavra não existe')
         return
     }
+
+    verificar_letra2(boxes, palavra_sorteada)
     
-    boxes.forEach((box, index) => {
-        verificar_letra(box, index, palavra_sorteada)
-    });
+    // boxes.forEach((box, index) => {
+    //     verificar_letra(box, index, palavra_sorteada)
+    // });
 
     if (!conferir_acerto(palavra, palavra_sorteada)) {
         tentativas++
