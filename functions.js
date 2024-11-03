@@ -1,23 +1,14 @@
-function caixa_seguinte(caixaAtiva) {
-    if (!caixaAtiva.value) return // Verifica se há uma caixa ativa
-
+export function mover_caixa(caixaAtiva, direcao) {
+    if (!caixaAtiva.value) return
     const next_box = caixaAtiva.value.nextElementSibling
+    const previous_box = caixaAtiva.value.previousElementSibling
     caixaAtiva.value.classList.remove('letter-edit')
-    caixaAtiva.value = next_box
+
+    caixaAtiva.value = direcao === 'seguinte' ? next_box : previous_box;
 
     if (caixaAtiva.value && caixaAtiva.value.classList.contains('letter-box')) {
         caixaAtiva.value.classList.add('letter-edit')
-    }
-}
-export function pressionamento_tecla(caixaAtiva) {
-    document.addEventListener('keydown', (event) => {
-        if (!caixaAtiva.value) return
-        if (event.key.length === 1 && /^[a-zA-Z]$/.test(event.key)) {
-            caixaAtiva.value.textContent = event.key.toUpperCase()
-            caixa_seguinte(caixaAtiva)
-            event.preventDefault()
-        }
-    });
+    } 
 }
 
 export function atualizar_linhas(tentativas, caixaAtivaRef) {
@@ -50,18 +41,21 @@ export function conferir_acerto(palavra, palavra_sorteada) {
     return palavra.toUpperCase() === palavra_sorteada.toUpperCase()
 }
 
-export function errou_palavra(tentativas, caixaAtivaRef) {
+function escolher_caixa(caixaAtivaRef, caixa) {
+    ///escolher caixa
+    if (caixaAtivaRef.value) {
+        caixaAtivaRef.value.classList.remove('letter-edit')
+    }
+    caixa.classList.add('letter-edit')
+    caixaAtivaRef.value = caixa
+}
+
+export function escolher_primeira_caixa(tentativas, caixaAtivaRef) {
     const nova_linha = document.getElementById(`row-${tentativas}`)
     const primeira_caixa = nova_linha.querySelector('.letter-box')  
     if (primeira_caixa) {
-        if (caixaAtivaRef.value) {
-            caixaAtivaRef.value.classList.remove('letter-edit')
-        }
-        primeira_caixa.classList.add('letter-edit')
-        caixaAtivaRef.value = primeira_caixa
+        escolher_caixa(caixaAtivaRef, primeira_caixa)
         atualizar_linhas(tentativas, caixaAtivaRef)
-    } else {
-        alert('Não há mais linhas para jogar. Fim de jogo.')
     }
 }
 
@@ -79,7 +73,7 @@ export async function carregar_palavras(caminho_arquivo) {
     }
 }
 
-export function verificar_letra2(boxes, palavra_sorteada) {
+export function verificar_letra(boxes, palavra_sorteada) {
     palavra_sorteada = palavra_sorteada.toUpperCase();
     console.log('funcao verificar_letra2')
 
@@ -104,18 +98,6 @@ export function verificar_letra2(boxes, palavra_sorteada) {
         }
     })
 
-}
-
-export function verificar_letra(box, indice, palavra_sorteada) {
-    const letra = box.textContent.toUpperCase()
-
-    if (letra === palavra_sorteada.toUpperCase()[indice]) {
-        box.classList.add('letter-right-position')
-    } else if (palavra_sorteada.toUpperCase().includes(letra)) {
-        box.classList.add('letter-included')
-    } else {
-        console.log(` A Letra ${letra} não existe na palavra`)
-    }
 }
 
 export function verificar_se_palavra_existe(palavras, tentativas) {
