@@ -42,7 +42,6 @@ export function conferir_acerto(palavra, palavra_sorteada) {
 }
 
 function escolher_caixa(caixaAtivaRef, caixa) {
-    ///escolher caixa
     if (caixaAtivaRef.value) {
         caixaAtivaRef.value.classList.remove('letter-edit')
     }
@@ -89,7 +88,7 @@ export function verificar_letra(boxes, palavra_sorteada) {
             console.log(`${letra}, posicao ${index}`)
             if (palavra_sorteada.toUpperCase()[index] === letra) {
                 box.classList.add('letter-right-position')
-                letrasDisponiveis[letra]--;
+                letrasDisponiveis[letra]--
             } else if (palavra_sorteada.toUpperCase().includes(letra)) {
                 box.classList.add('letter-included')
             } else {

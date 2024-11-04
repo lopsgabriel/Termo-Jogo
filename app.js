@@ -6,8 +6,14 @@ import {
 let caixaAtiva = { value: null }; 
 let tentativas = 1
 const caminho_arquivo = 'palavras.txt'
+const caminho_arquivo_simples = 'palavras-simples.txt'
+const palavras_simples = await carregar_palavras(caminho_arquivo_simples)   
 const palavras = await carregar_palavras(caminho_arquivo)
-const palavra_sorteada = await sortear_palavra(palavras)
+
+//originalmente, o jogo usa as palavras da variavel "palavras", já que é um arquivo de texto com uma quantidade enorme de palavras
+// mas as palavras apesar de existirem, muitas eram desconhecidas, então criei um aquivo com palavras mais simples
+// para que o jogo fosse mais facil
+const palavra_sorteada = await sortear_palavra(palavras_simples)
 
 function pressionamento_tecla(caixaAtiva) {
    const caixas = document.getElementById(`row-${tentativas}`).querySelectorAll('.letter-box')
@@ -20,10 +26,15 @@ function pressionamento_tecla(caixaAtiva) {
             if (!caixaAtiva.value){
                 const ultima_caixa = caixas[caixas.length - 1]
                 caixaAtiva.value = ultima_caixa
+                caixaAtiva.value.textContent = '' 
+                caixaAtiva.value.classList.add('letter-edit')
+            } else {
+                event.preventDefault()
+                if (caixaAtiva.value.textContent === '') mover_caixa(caixaAtiva, 'anterior')
+                caixaAtiva.value.textContent = ''
             }
-            event.preventDefault()
-            caixaAtiva.value.textContent = '' 
-            mover_caixa(caixaAtiva, 'anterior')
+            
+            
        }
        if (event.key.length === 1 && /^[a-zA-Z]$/.test(event.key)) {
             if (!caixaAtiva.value) escolher_primeira_caixa(tentativas, caixaAtiva)
