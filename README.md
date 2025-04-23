@@ -1,6 +1,6 @@
 # 🎯 Termo-Jogo
 
-Um jogo estilo "Termo" (ou Wordle brasileiro) desenvolvido em React com Vite e TypeScript. O objetivo é adivinhar a palavra do dia com o menor número de tentativas possível, utilizando dicas de letras corretas e posições erradas. Ideal para treinar vocabulário e se divertir com lógica!
+Um jogo estilo "Termo" (ou Wordle brasileiro) desenvolvido em Javascript. O objetivo é adivinhar a palavra do dia com o menor número de tentativas possível, utilizando dicas de letras corretas e posições erradas. Ideal para treinar vocabulário e se divertir com lógica!
 
 ## 🧠 Funcionalidades
 
@@ -8,7 +8,7 @@ Um jogo estilo "Termo" (ou Wordle brasileiro) desenvolvido em React com Vite e T
 - Interface simples, responsiva e intuitiva  
 - Feedback visual para letras corretas, erradas e fora de posição  
 - Validação de palavras com base em uma lista pré-definida  
-- Armazenamento local das estatísticas (tentativas, vitórias, etc.)
+- Armazenamento local das estatísticas (tentativas, etc)
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -31,19 +31,11 @@ git clone https://github.com/lopsgabriel/Termo-Jogo.git
 cd Termo-Jogo
 ```
 
-3. Instale as dependências:
+3. Abra o arquivo `index.html` no seu navegador:
 
-```
-npm install
-```
+Você pode simplesmente clicar duas vezes no arquivo ou usar uma extensão como o Live Server no VSCode para facilitar o desenvolvimento.
 
-4. Rode o projeto:
-
-```
-npm run dev
-```
-
-5. Acesse em `http://localhost:5173`
+> 💡 Dica: Se estiver usando o Visual Studio Code, instale a extensão **Live Server** e clique com o botão direito no `index.html` para abrir com Live Server.
 
 
 ## 🤝 Contribuições
